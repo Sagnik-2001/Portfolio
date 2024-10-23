@@ -1,0 +1,412 @@
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Almarai', sans-serif;
+    line-height: 1.6;
+    background-color: #F5F5DC; /* Light Sand for a soft, neutral background */
+    color: #2F4F4F; /* Dark Slate Gray Text for clarity */
+    transition: background-color 0.5s ease-in-out;
+    font-size: larger;
+}
+
+header {
+    background: #1E3A8A; /* Midnight Blue for an impactful header */
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    transition: background-color 0.3s;
+    
+}
+
+header:hover {
+    background-color: #2B4F9C; /* Slightly lighter midnight blue on hover */
+}
+
+header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+header nav ul li {
+    margin: 0 2.5rem;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1rem;
+    position: relative;
+    transition: color 0.4s;
+    font-size: larger;
+}
+
+header nav ul li a:hover {
+    color: #FF6F61; /* Vibrant Coral for hover effect on links */
+    letter-spacing: 1px;
+}
+
+section {
+    padding: 2rem;
+    text-align: center;
+    background-color: #fff; /* Crisp white background for content sections */
+    margin: 2rem 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    border: 1px solid #ddd; /* Subtle border */
+    opacity: 0;
+    animation: slideUp 1.5s ease forwards;
+}
+
+
+home {
+    position: relative;
+}
+
+#home img:hover {
+    transform: scale(1.1); /* Slight zoom effect on hover */
+}
+
+#home h1 {
+    animation: fadeIn 1.5s ease; /* Fade-in animation for heading */
+    
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#home p {
+    animation: slideUp 1.5s ease; /* Slide-up animation for paragraph */
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.profile-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow for the profile photo */
+    animation: bounce 2s infinite;
+}
+
+h1, h2 {
+    margin-bottom: 1rem;
+    color: #1E3A8A; /* Midnight Blue for a bold look on headings */
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+h2{
+    font-size: 2rem;
+}
+
+#education {
+    padding: 20px;
+    background-color: #f9f9f9; /* Light gray background */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd; /* Light gray border */
+}
+
+th {
+    background-color: #2F4F4F; /* Darker background for header */
+    color: white; /* White text for header */
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Zebra striping for rows */
+}
+
+
+.project-card {
+    background-color: #FF6F61; /* Vibrant Coral background for the project cards */
+    padding: 1.5rem;
+    margin: 1rem 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border-radius: 1rem;
+    color: white;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.project-link {
+    display: inline-block; /* Makes it behave like a button */
+    padding: 0.5rem 1rem; /* Space inside the button */
+    background-color: #1E3A8A; /* Midnight Blue for a button look */
+    color: #fff; /* White text */
+    text-decoration: none; /* No underline */
+    border-radius: 0.5rem; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth background change */
+    margin-top: 1rem; /* Space above */
+}
+
+.project-link:hover {
+    background-color: #2E8B57; /* Darker green on hover */
+}
+
+#skills ul li {
+    list-style: none;
+    padding: 10px; /* Add some padding for better spacing */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+#skills ul li:hover {
+    background-color: #d3f3d3; /* Light green background on hover */
+}
+
+
+
+button {
+    padding: 0.8rem 1.5rem;
+    background-color: #1E3A8A; /* Midnight Blue for buttons */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+}
+
+button:hover {
+    background-color: #2E8B57; /* Sea Green for hover effect */
+    transform: scale(1.05);
+}
+
+
+/* Style for the Internship & Training Section */
+#internship {
+    background-color: #f9f9f9; /* Light background color */
+    padding: 2rem; /* Padding around the section */
+    border-radius: 1rem; /* Rounded corners */
+    margin: 2rem 0; /* Margin to separate from other sections */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Consistent shadow effect */
+    opacity: 0; /* Start with opacity for animation */
+    animation: slideUp 1.5s ease forwards; /* Apply slide up animation */
+}
+
+#internship h2 {
+    text-align: center; /* Centered heading */
+    color: #1E3A8A; /* Midnight Blue for heading color */
+    margin-bottom: 1.5rem; /* Space below the heading */
+}
+
+.internship-card {
+    background-color: #ffffff; /* White background for cards */
+    border: 1px solid #ddd; /* Subtle border */
+    border-radius: 1rem; /* Rounded corners */
+    padding: 1.5rem; /* Padding inside the card */
+    margin-bottom: 1.5rem; /* Spacing between cards */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.3s, box-shadow 0.3s; /* Animation effects */
+}
+
+.internship-card:hover {
+    transform: translateY(-5px); /* Slight lift effect on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Increased shadow on hover */
+}
+
+.internship-card h3 {
+    margin-top: 0; /* Remove default margin on top */
+    color: #2E8B57; /* Color for card title */
+}
+
+.internship-card p {
+    color: #555; /* Gray color for text */
+    line-height: 1.5; /* Improved readability with line height */
+}
+
+
+/* Skills Section */
+#skills {
+    background-color: #f9f9f9; /* Light background color */
+    padding: 20px; /* Padding around the section */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    margin: 20px 0; /* Margin to separate from other sections */
+}
+
+#skills h2 {
+    text-align: center; /* Center the heading */
+    color: #1E3A8A; /* Teal color for the heading */
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+#skills ul {
+    list-style-type: none; /* Remove default bullet points */
+    padding: 0; /* Remove padding */
+    display: flex; /* Flexbox for layout */
+    flex-direction: column; /* Stack items vertically */
+    gap: 10px; /* Space between items */
+    max-width: 600px; /* Limit the width for better readability */
+    margin: auto; /* Center the list */
+}
+
+#skills ul li {
+    background-color: #fff; /* White background for items */
+    padding: 15px; /* Padding inside the items */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth animation for hover effects */
+}
+
+#skills ul li:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Increased shadow on hover */
+}
+
+/* Style for strong elements */
+#skills ul li strong {
+    color: #2E8B57; /* Teal color for skill categories */
+}
+
+
+#contact {
+    background-color: #f7f7f7;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+#contact ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#contact ul li {
+    margin: 10px 0;
+    font-size: 1.2em;
+}
+
+#contact a {
+    color: #1e3a8a;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#contact a:hover {
+    text-decoration: underline;
+}
+
+#contact ul div {
+    display: flex;
+    justify-content: center;  /* Centers the items horizontally */
+    gap: 25px;                /* Adds space between the items */
+    list-style-type: none;    /* Removes bullet points */
+    padding: 0;
+    margin: 0;
+}
+
+#contact ul div li a:hover{
+    color: #0c8499; /* Sea Green for hover effect */
+    transform: scale(1.05);
+}
+
+#contact-form input, #contact-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    border: 1.5px solid #ccc; /* Light Gray border */
+    border-radius: 0.5rem;
+    transition: border-color 0.3s;
+}
+
+.msg{
+    text-align: center;
+    justify-content: center;
+}
+
+
+/* Apply this to the parent container (e.g., form or section) */
+#contact-form {
+    display: flex;
+    justify-content: center; /* Horizontally centers the button */
+    align-items: center;     /* Vertically centers the button if needed */
+    flex-direction: column;  /* Ensure that items are stacked vertically */
+}
+
+/* button{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+
+
+#contact-form input:focus, #contact-form textarea:focus {
+    border-color: #1E3A8A; /* Midnight Blue border on focus */
+    outline: none;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+footer {
+    margin-top: 8px;
+    background-color: #1e3a8a; /* Dark background color */
+    color: #fff; /* White text color */
+    text-align: center; /* Center the text */
+    padding: 10px 0; /* Add some padding */
+    position: relative; /* Keep it at the bottom of the page */
+    bottom: 0; /* Align to bottom */
+    width: 100%; /* Full width */
+}
+
+footer p {
+    margin: 5px 0; /* Add some margin to paragraphs */
+}
