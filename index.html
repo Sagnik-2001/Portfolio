@@ -1,225 +1,864 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sagnik Ghoshal--Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sagnik Ghoshal — Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0d0d0d;
+    --ink2: #2a2a2a;
+    --ink3: #555;
+    --paper: #f7f4ef;
+    --paper2: #eeeae2;
+    --paper3: #e5e0d6;
+    --accent: #c84b11;
+    --accent2: #e8a87c;
+    --gold: #c9a84c;
+    --nav-h: 64px;
+    --r: 4px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ---- NAV ---- */
+  #nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: var(--nav-h);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 4vw;
+    background: var(--paper);
+    border-bottom: 1px solid var(--paper3);
+    transition: box-shadow .3s;
+  }
+  #nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,.07); }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.15rem;
+    letter-spacing: -.02em; color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: .72rem; letter-spacing: .12em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--ink3);
+    transition: color .2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px;
+    background: var(--accent); transition: width .25s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ---- HERO ---- */
+  #home {
+    min-height: 100vh;
+    padding: calc(var(--nav-h) + 60px) 4vw 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-text {
+    position: absolute; right: -2vw; top: 50%; transform: translateY(-50%);
+    font-family: 'Syne', sans-serif; font-size: clamp(80px, 14vw, 180px);
+    font-weight: 800; color: transparent;
+    -webkit-text-stroke: 1px var(--paper3);
+    white-space: nowrap; pointer-events: none; user-select: none;
+    z-index: 0; letter-spacing: -.03em;
+  }
+  .hero-left { z-index: 1; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'DM Mono', monospace; font-size: .72rem;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.5rem;
+  }
+  .hero-tag::before {
+    content: ''; display: block; width: 32px; height: 1px; background: var(--accent);
+  }
+  h1.hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    font-weight: 800; line-height: 1.0; letter-spacing: -.03em;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  h1.hero-name em {
+    font-style: normal; color: var(--accent);
+    display: block; font-size: .75em;
+  }
+  .hero-sub {
+    font-size: 1.05rem; color: var(--ink3); line-height: 1.7;
+    max-width: 42ch; margin-bottom: 2.5rem; font-weight: 300;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: .5rem;
+    padding: .75rem 1.5rem; border-radius: 2px;
+    font-family: 'DM Mono', monospace; font-size: .75rem;
+    letter-spacing: .1em; text-transform: uppercase;
+    text-decoration: none; font-weight: 500;
+    transition: all .2s; cursor: pointer; border: none;
+  }
+  .btn-primary {
+    background: var(--accent); color: #fff;
+  }
+  .btn-primary:hover { background: #a83a08; transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--paper3);
+  }
+  .btn-outline:hover { border-color: var(--ink3); transform: translateY(-2px); }
+
+  .hero-right { z-index: 1; display: flex; justify-content: center; align-items: center; }
+  .hero-photo-wrap {
+    position: relative; width: 340px; height: 380px;
+  }
+  .hero-photo-frame {
+    position: absolute; top: 20px; left: 20px; right: -20px; bottom: -20px;
+    border: 1px solid var(--paper3); border-radius: 2px; z-index: 0;
+  }
+  .hero-photo {
+    position: absolute; top: 0; left: 0; right: 20px; bottom: 20px;
+    background: var(--paper2); border-radius: 2px; overflow: hidden;
+    z-index: 1; display: flex; align-items: center; justify-content: center;
+  }
+  .hero-photo img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .hero-photo-initials {
+    font-family: 'Syne', sans-serif; font-size: 5rem; font-weight: 800;
+    color: var(--paper3); user-select: none;
+  }
+  .hero-stats {
+    position: absolute; bottom: 10px; right: -60px; z-index: 2;
+    display: flex; flex-direction: column; gap: .5rem;
+  }
+  .stat-chip {
+    background: var(--ink); color: #fff; border-radius: 2px;
+    padding: .5rem .9rem;
+    font-family: 'DM Mono', monospace; font-size: .68rem;
+    letter-spacing: .06em;
+  }
+  .stat-chip strong { font-size: 1.1rem; display: block; font-family: 'Syne', sans-serif; font-weight: 700; }
+
+  /* ---- SECTION BASE ---- */
+  section { padding: 100px 4vw; }
+  .section-label {
+    font-family: 'DM Mono', monospace; font-size: .72rem;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 1rem; display: flex; align-items: center; gap: .75rem;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--paper3); max-width: 60px; }
+  h2.section-title {
+    font-family: 'Syne', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800; letter-spacing: -.03em; line-height: 1.05;
+    color: var(--ink); margin-bottom: 3rem;
+  }
+
+  /* ---- ABOUT ---- */
+  #about { background: var(--ink); color: var(--paper); }
+  #about .section-label { color: var(--accent2); }
+  #about .section-label::after { background: rgba(255,255,255,.1); }
+  #about h2.section-title { color: var(--paper); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .about-text { font-size: 1.05rem; line-height: 1.9; color: rgba(247,244,239,.75); font-weight: 300; }
+  .about-text p + p { margin-top: 1.2rem; }
+  .about-highlights { display: flex; flex-direction: column; gap: 1.25rem; }
+  .highlight-item {
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 2px; padding: 1.5rem;
+    display: flex; gap: 1.25rem; align-items: flex-start;
+    transition: border-color .2s;
+  }
+  .highlight-item:hover { border-color: var(--accent2); }
+  .highlight-icon {
+    width: 40px; height: 40px; border-radius: 2px;
+    background: rgba(200,75,17,.2); display: flex;
+    align-items: center; justify-content: center; flex-shrink: 0;
+    color: var(--accent2); font-size: 1.1rem;
+  }
+  .highlight-item h4 {
+    font-family: 'Syne', sans-serif; font-size: .9rem; font-weight: 600;
+    color: var(--paper); margin-bottom: .3rem;
+  }
+  .highlight-item p { font-size: .85rem; color: rgba(247,244,239,.6); line-height: 1.6; font-weight: 300; }
+
+  /* ---- EDUCATION ---- */
+  #education { background: var(--paper2); }
+  .edu-list { display: flex; flex-direction: column; gap: 0; }
+  .edu-item {
+    display: grid; grid-template-columns: 100px 1fr auto;
+    gap: 2rem; align-items: center;
+    padding: 2rem 0; border-bottom: 1px solid var(--paper3);
+    transition: background .2s;
+  }
+  .edu-item:first-child { border-top: 1px solid var(--paper3); }
+  .edu-year {
+    font-family: 'DM Mono', monospace; font-size: .8rem;
+    color: var(--accent); letter-spacing: .05em;
+  }
+  .edu-info h3 {
+    font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700;
+    color: var(--ink); margin-bottom: .3rem;
+  }
+  .edu-info p { font-size: .88rem; color: var(--ink3); }
+  .edu-grade {
+    font-family: 'DM Mono', monospace; font-size: 1.5rem; font-weight: 500;
+    color: var(--ink); letter-spacing: -.02em;
+    white-space: nowrap;
+  }
+  .edu-grade span { font-size: .65rem; color: var(--ink3); letter-spacing: .1em; display: block; text-align: right; }
+
+  /* ---- PROJECTS ---- */
+  #projects { }
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+  .project-card {
+    border: 1px solid var(--paper3); border-radius: 2px;
+    padding: 2rem; background: var(--paper);
+    transition: all .25s; position: relative; overflow: hidden;
+  }
+  .project-card::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0;
+    background: var(--accent); transition: height .3s;
+  }
+  .project-card:hover { border-color: transparent; box-shadow: 0 12px 40px rgba(0,0,0,.08); transform: translateY(-4px); }
+  .project-card:hover::before { height: 100%; }
+  .project-num {
+    font-family: 'DM Mono', monospace; font-size: .7rem; color: var(--accent);
+    letter-spacing: .1em; margin-bottom: 1.2rem; display: block;
+  }
+  .project-card h3 {
+    font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700;
+    color: var(--ink); margin-bottom: .75rem;
+  }
+  .project-card p { font-size: .9rem; color: var(--ink3); line-height: 1.7; margin-bottom: 1.25rem; font-weight: 300; }
+  .project-tech {
+    display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.25rem;
+  }
+  .tech-tag {
+    font-family: 'DM Mono', monospace; font-size: .65rem; letter-spacing: .08em;
+    text-transform: uppercase; padding: .3rem .7rem;
+    background: var(--paper2); color: var(--ink3); border-radius: 1px;
+  }
+  .project-link {
+    font-family: 'DM Mono', monospace; font-size: .72rem; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--accent); text-decoration: none;
+    display: inline-flex; align-items: center; gap: .4rem;
+    transition: gap .2s;
+  }
+  .project-link:hover { gap: .7rem; }
+
+  /* ---- INTERNSHIP ---- */
+  #internship { background: var(--paper2); }
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px; background: var(--paper3);
+  }
+  .timeline-item {
+    position: relative; margin-bottom: 3rem;
+  }
+  .timeline-dot {
+    position: absolute; left: -2.4rem; top: .3rem;
+    width: 10px; height: 10px; border-radius: 50%;
+    border: 2px solid var(--accent); background: var(--paper2);
+  }
+  .timeline-date {
+    font-family: 'DM Mono', monospace; font-size: .72rem; letter-spacing: .08em;
+    color: var(--accent); margin-bottom: .5rem;
+  }
+  .timeline-item h3 {
+    font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700;
+    color: var(--ink); margin-bottom: .25rem;
+  }
+  .timeline-item h4 { font-size: .88rem; color: var(--ink3); font-weight: 400; margin-bottom: .75rem; }
+  .timeline-item p { font-size: .88rem; color: var(--ink3); line-height: 1.75; font-weight: 300; }
+
+  /* ---- SKILLS ---- */
+  #skills { background: var(--ink); color: var(--paper); }
+  #skills .section-label { color: var(--accent2); }
+  #skills .section-label::after { background: rgba(255,255,255,.1); }
+  #skills h2.section-title { color: var(--paper); }
+  .skills-groups { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2rem; }
+  .skill-group { }
+  .skill-group-title {
+    font-family: 'DM Mono', monospace; font-size: .7rem; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--accent2); margin-bottom: 1.2rem;
+    padding-bottom: .75rem; border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: .6rem; }
+  .skill-tag {
+    padding: .45rem 1rem; border: 1px solid rgba(255,255,255,.12);
+    border-radius: 1px; font-size: .82rem; color: rgba(247,244,239,.8);
+    transition: all .2s;
+  }
+  .skill-tag:hover { border-color: var(--accent2); color: var(--accent2); }
+
+  /* ---- CONTACT ---- */
+  #contact { }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+  .contact-info h3 {
+    font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700;
+    color: var(--ink); margin-bottom: 2rem;
+  }
+  .contact-detail {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.25rem 0; border-bottom: 1px solid var(--paper3);
+  }
+  .contact-detail:first-of-type { border-top: 1px solid var(--paper3); }
+  .contact-detail-icon {
+    width: 36px; height: 36px; background: var(--paper2);
+    border-radius: 2px; display: flex; align-items: center; justify-content: center;
+    color: var(--accent); flex-shrink: 0; font-size: .9rem;
+  }
+  .contact-detail-text { font-size: .88rem; color: var(--ink3); line-height: 1.6; }
+  .contact-detail-text a { color: var(--ink); text-decoration: none; }
+  .contact-detail-text a:hover { color: var(--accent); }
+  .social-links { display: flex; gap: 1rem; margin-top: 2rem; }
+  .social-link {
+    width: 44px; height: 44px; border: 1px solid var(--paper3);
+    border-radius: 2px; display: flex; align-items: center; justify-content: center;
+    color: var(--ink3); text-decoration: none; font-size: 1rem;
+    transition: all .2s;
+  }
+  .social-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: .4rem; }
+  .form-label {
+    font-family: 'DM Mono', monospace; font-size: .68rem; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--ink3);
+  }
+  .form-input, .form-textarea {
+    border: 1px solid var(--paper3); border-radius: 2px;
+    padding: .9rem 1rem; font-family: 'DM Sans', sans-serif; font-size: .9rem;
+    color: var(--ink); background: var(--paper);
+    outline: none; transition: border-color .2s;
+    resize: none;
+  }
+  .form-input:focus, .form-textarea:focus { border-color: var(--accent); }
+  .form-textarea { min-height: 140px; }
+  .btn-send {
+    background: var(--accent); color: #fff; border: none;
+    padding: .9rem 2rem; border-radius: 2px;
+    font-family: 'DM Mono', monospace; font-size: .78rem; letter-spacing: .1em;
+    text-transform: uppercase; cursor: pointer; align-self: flex-start;
+    transition: all .2s; display: inline-flex; align-items: center; gap: .5rem;
+  }
+  .btn-send:hover { background: #a83a08; transform: translateY(-2px); }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--ink2); color: rgba(247,244,239,.4);
+    text-align: center; padding: 2rem 4vw;
+    font-family: 'DM Mono', monospace; font-size: .72rem; letter-spacing: .08em;
+  }
+  footer span { color: var(--accent); }
+
+  /* ---- ANIMATIONS ---- */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s, transform .7s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: .1s; }
+  .reveal-delay-2 { transition-delay: .2s; }
+  .reveal-delay-3 { transition-delay: .3s; }
+  .reveal-delay-4 { transition-delay: .4s; }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 900px) {
+    #home { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .edu-item { grid-template-columns: 80px 1fr; }
+    .edu-grade { display: none; }
+    .nav-links { gap: 1.2rem; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .nav-links li:nth-child(n+4) { display: none; }
+    section { padding: 70px 5vw; }
+  }
+</style>
 </head>
 <body>
-    <!-- Header / Navigation -->
-    <header id="header">
-        <nav>
-            <ul>
-                <li><a href="#home">HOME</a></li>
-                <li><a href="#about">ABOUT</a></li>
-                <li><a href="#education">EDUCATION</a></li>
-                <li><a href="#projects">PROJECTS</a></li>
-                <li><a href="#skills">SKILLS</a></li>
-                <li><a href="#contact">CONTACT</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <!-- Home Section -->
-    <section id="home" style="text-align: center; padding: 50px; background-color: #F0F8FF; /* Light Blue Background */">
-        <h1 style="font-size: 2.0rem; font-family: 'Playwrite'; text-shadow: 0px 0px 15px rgba(73, 73, 39, 0.8); color: #2F4F4F;"> 
-            <i">Hi, I'm Sagnik Ghoshal</i>
-        </h1>
-        <!-- <a href="https://www.wikipedia.org/"> -->
-            <img src="myphoto.jpg" alt="Sagnik Ghoshal" class="profile-photo" 
-                 style="width: 150px; height: 150px; border-radius: 50%; 
-                        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.966); 
-                        transition: transform 0.3s;">
-        <!-- </a> -->
-        <p style="font-size: 1.5rem; font-weight: bold; color: #2F4F4F; margin-top: 20px;">
-            ECE Engineer, Programmer, Developer
-        </p>
-    </section>
-    <!-- about section -->
-     <section id="about">
-        <h2>About Me</h2>
-        
-        <p> I am a dedicated 4th-year Electronics and Communication Engineering (ECE) student with a strong passion for technology and innovation. My journey in the ECE field has equipped me with a solid foundation in Electronics, Programming and Software development. I am eager to apply my skills and knowledge in the IT sector, where I have gained valuable insights through various projects and practical experiences. <br>
-            I am committed to continuous personal and professional growth, actively seeking challenging assignments that push my boundaries. My goal is to contribute to meaningful projects that drive process improvements and enhance business efficiency. I thrive in collaborative environments and am driven by a desire to provide value in every task I undertake.</p>
-     </section>
+<!-- NAV -->
+<header id="nav">
+  <a href="#home" class="nav-logo">SG<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</header>
 
-     <!-- Education Section -->
-<section id="education">
-    <h2>Education</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Degree</th>
-                <th>% of Marks</th>
-                <th>Year of Passing</th>
-                <th>Institution</th>
-                <th>Board/Univercity</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>B.Tech in Electronics and Communication Engineering</td>
-                <td>68.00</td>
-                <td>2025</td>
-                <td>College of Engineering and Management, Kolaghat</td>
-                <td>MAKAUT</td>
-            </tr>
-
-            <tr>
-                <td>Diploma in Electronics and Communication Engineering</td>
-                <td>84.1</td>
-                <td>2022</td>
-                <td>Jangipur Government Polytechnic</td>
-                <td>W.B.S.C.T.E</td>
-            </tr>
-
-            <tr>
-                <td>Higher Secondary</td>
-                <td>62.00</td>
-                <td>2018</td>
-                <td>Panitras High School</td>
-                <td>W.B.C.H.S.E</td>
-            </tr>
-            <tr>
-                <td>Secondary</td>
-                <td>73.85</td>
-                <td>2016</td>
-                <td>Panitras High School</td>
-                <td>W.B.B.S.E</td>
-            </tr>
-        </tbody>
-    </table>
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg-text">DEV</div>
+  <div class="hero-left">
+    <div class="hero-tag reveal">Open to opportunities</div>
+    <h1 class="hero-name reveal reveal-delay-1">
+      Sagnik<br>Ghoshal
+      <em>Full Stack Developer</em>
+    </h1>
+    <p class="hero-sub reveal reveal-delay-2">
+      Full Stack Developer specialising in ERP systems, dynamic web applications, and mobile apps. I build scalable, database-driven solutions — from PHP backends to React Native frontends.
+    </p>
+    <div class="hero-ctas reveal reveal-delay-3">
+      <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-arrow-down"></i> View Projects</a>
+      <a href="#contact" class="btn btn-outline">Get in touch</a>
+    </div>
+  </div>
+  <div class="hero-right reveal reveal-delay-2">
+    <div class="hero-photo-wrap">
+      <div class="hero-photo-frame"></div>
+      <div class="hero-photo">
+        <div class="hero-photo-initials">SG</div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-chip"><strong>1+</strong>Yr Full Stack</div>
+        <div class="stat-chip"><strong>8+</strong>Projects</div>
+        <div class="stat-chip"><strong>6+</strong>Trainings</div>
+      </div>
+    </div>
+  </div>
 </section>
 
-
-     <!-- project section -->
-      <section id="projects">
-        <h2>Projects</h2>
-        <div class="project-card">
-            <h3>Project 1: Smart Dustbin</h3>
-            <p>A fully contactless smart dustbin using arduino, ultrasonic sensor and servo motor.</p>
-            <p><strong>Tech Stack:</strong> Arduino UNO, C, IOT</p>
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label reveal">01 — About</div>
+  <h2 class="section-title reveal reveal-delay-1">Who I am</h2>
+  <div class="about-grid">
+    <div class="about-text reveal reveal-delay-1">
+      <p>I'm a Full Stack Developer with hands-on experience building ERP systems, dynamic web applications, and mobile apps using PHP, JavaScript, MySQL, HTML, CSS, Bootstrap, and React Native. My background in Electronics & Communication Engineering gives me a strong technical foundation that bridges hardware thinking with modern software development.</p>
+      <p>Currently at Softech ERP Solutions, I lead module development, design scalable database schemas, build REST APIs, and deliver end-to-end features across complex enterprise platforms. I'm also pursuing an MBA to complement my technical skills with business and management expertise.</p>
+      <p>Based in West Bengal, India — open to remote and on-site opportunities in software development, ERP systems, and web engineering.</p>
+    </div>
+    <div class="about-highlights reveal reveal-delay-2">
+      <div class="highlight-item">
+        <div class="highlight-icon"><i class="fa-solid fa-server"></i></div>
+        <div>
+          <h4>Full Stack & ERP Development</h4>
+          <p>PHP, JavaScript, jQuery, AJAX, MySQL — building and maintaining enterprise-grade ERP modules with complex business logic and automated workflows.</p>
         </div>
-
-        <div class="project-card">
-            <h3>Project 2: E-Commerce Website</h3>
-            <p> Created a responsive E-Commerce platform featuring a navbar with dropdown menus for product categories (Men, Women, Kids) and a search function.I have given the link of my social media.</p>
-            <p><strong>Tech Stack: </strong>HTML, CSS, JavaScript</p>
-            <a href="https://sagnik-2001.github.io/E-Commerce/" class="project-link">View Project</a>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+        <div>
+          <h4>Mobile & Web Applications</h4>
+          <p>React Native for mobile apps, responsive front-end with Bootstrap, and REST API integration. Delivered real-world applications from design to deployment.</p>
         </div>
-
-        <div class="project-card">
-            <h3>Project 2: ATM Note Counter</h3>
-            <p>My ATM note counter project calculates the number of each currency denomination needed for efficient cash withdrawals.</p>
-            <p><strong>Tech Stack: </strong>HTML, CSS, JavaScript</p>
-            <a href="https://sagnik-2001.github.io/ATM-note-counter/" class="project-link">View Project</a>
+      </div>
+      <div class="highlight-item">
+        <div class="highlight-icon"><i class="fa-solid fa-database"></i></div>
+        <div>
+          <h4>Database & Backend Architecture</h4>
+          <p>MySQL schema design, SQL query optimisation, MVC structure, and scalable backend systems. Focused on performance, reliability, and clean architecture.</p>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="project-card">
-            <h3>Project 3: Tic Tac Toe</h3>
-            <p>My Tic-Tac-Toe project implementing interactive gameplay, logic-based win detection, and a user-friendly interface for a classic two-player game.</p>
-            <p><strong>Tech Stack: </strong>HTML,CSS,Javascript</p>
-            <a href="https://sagnik-2001.github.io/Tic-Tac-Toe/" class="project-link">View Project</a>
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label reveal">02 — Education</div>
+  <h2 class="section-title reveal reveal-delay-1">Academic background</h2>
+  <div class="edu-list">
+    <div class="edu-item reveal">
+      <div class="edu-year">2026–<br>Present</div>
+      <div class="edu-info">
+        <h3>MBA (Distance/Online) — Pursuing</h3>
+        <p>Shoolini University &nbsp;·&nbsp; 1st Semester</p>
+      </div>
+      <div class="edu-grade">—<span>in progress</span></div>
+    </div>
+    <div class="edu-item reveal reveal-delay-1">
+      <div class="edu-year">2022–2025</div>
+      <div class="edu-info">
+        <h3>B.Tech — Electronics & Communication Engineering</h3>
+        <p>College of Engineering and Management, Kolaghat &nbsp;·&nbsp; MAKAUT</p>
+      </div>
+      <div class="edu-grade">7.67<span>CGPA</span></div>
+    </div>
+    <div class="edu-item reveal reveal-delay-2">
+      <div class="edu-year">2019–2022</div>
+      <div class="edu-info">
+        <h3>Diploma — Electronics & Communication Engineering</h3>
+        <p>Jangipur Government Polytechnic &nbsp;·&nbsp; W.B.S.C.T.E</p>
+      </div>
+      <div class="edu-grade">8.60<span>CGPA</span></div>
+    </div>
+    <div class="edu-item reveal reveal-delay-3">
+      <div class="edu-year">2016–2018</div>
+      <div class="edu-info">
+        <h3>Higher Secondary</h3>
+        <p>W.B.C.H.S.E</p>
+      </div>
+      <div class="edu-grade">62<span>percent</span></div>
+    </div>
+    <div class="edu-item reveal reveal-delay-4">
+      <div class="edu-year">2015–2016</div>
+      <div class="edu-info">
+        <h3>Secondary</h3>
+        <p>W.B.B.S.E</p>
+      </div>
+      <div class="edu-grade">73.85<span>percent</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label reveal">03 — Projects</div>
+  <h2 class="section-title reveal reveal-delay-1">Things I've built</h2>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <span class="project-num">01</span>
+      <h3>BidNexus — Enterprise Bid Management System</h3>
+      <p>Enterprise-grade bid management platform with workflows for Technical & Financial Evaluation, Contract Management, PSD Tracking, and Bid Award processes. Includes role-based access control, email notifications, and reporting dashboards.</p>
+      <div class="project-tech">
+        <span class="tech-tag">PHP</span>
+        <span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">AJAX</span>
+        <span class="tech-tag">jQuery</span>
+        <span class="tech-tag">MySQL</span>
+      </div>
+    </div>
+    <div class="project-card reveal reveal-delay-1">
+      <span class="project-num">02</span>
+      <h3>Vihaan — Humanitarian & NGO Management Platform</h3>
+      <p>NGO management platform covering beneficiary management, donor tracking, and sponsorships. Integrated Razorpay payment gateway for secure donations, with reporting dashboards, analytics, and automated notification systems.</p>
+      <div class="project-tech">
+        <span class="tech-tag">PHP</span>
+        <span class="tech-tag">JavaScript</span>
+        <span class="tech-tag">MySQL</span>
+        <span class="tech-tag">Razorpay API</span>
+        <span class="tech-tag">AJAX</span>
+      </div>
+    </div>
+    <div class="project-card reveal reveal-delay-2">
+      <span class="project-num">03</span>
+      <h3>Attendance Management Mobile App</h3>
+      <p>React Native mobile application for employee attendance and workforce management — with authentication, real-time data sync, API integration, and responsive mobile interfaces.</p>
+      <div class="project-tech">
+        <span class="tech-tag">React Native</span>
+        <span class="tech-tag">REST API</span>
+        <span class="tech-tag">JavaScript</span>
+      </div>
+    </div>
+    <div class="project-card reveal">
+      <span class="project-num">04</span>
+      <h3>Smart Dustbin</h3>
+      <p>Fully contactless smart dustbin using an ultrasonic sensor to detect proximity and a servo motor to automatically open the lid — a clean embedded IoT solution.</p>
+      <div class="project-tech">
+        <span class="tech-tag">Arduino UNO</span>
+        <span class="tech-tag">C</span>
+        <span class="tech-tag">IoT</span>
+        <span class="tech-tag">Embedded</span>
+      </div>
+    </div>
+    <div class="project-card reveal reveal-delay-1">
+      <span class="project-num">05</span>
+      <h3>E-Commerce Website</h3>
+      <p>Responsive e-commerce platform with dropdown category navigation for Men, Women and Kids, integrated search, and social media links.</p>
+      <div class="project-tech">
+        <span class="tech-tag">HTML</span>
+        <span class="tech-tag">CSS</span>
+        <span class="tech-tag">JavaScript</span>
+      </div>
+      <a href="https://sagnik-2001.github.io/E-Commerce/" target="_blank" class="project-link">View live <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="project-card reveal reveal-delay-2">
+      <span class="project-num">06</span>
+      <h3>ATM Note Counter</h3>
+      <p>Calculates the optimal combination of currency denominations for any withdrawal amount — clean, instant, and accurate logic in the browser.</p>
+      <div class="project-tech">
+        <span class="tech-tag">HTML</span>
+        <span class="tech-tag">CSS</span>
+        <span class="tech-tag">JavaScript</span>
+      </div>
+      <a href="https://sagnik-2001.github.io/ATM-note-counter/" target="_blank" class="project-link">View live <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="project-card reveal reveal-delay-1">
+      <span class="project-num">07</span>
+      <h3>Tic Tac Toe</h3>
+      <p>Interactive two-player Tic-Tac-Toe with real-time win detection and a clean, responsive interface.</p>
+      <div class="project-tech">
+        <span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span>
+      </div>
+      <a href="https://sagnik-2001.github.io/Tic-Tac-Toe/" target="_blank" class="project-link">View live <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="project-card reveal reveal-delay-2">
+      <span class="project-num">08</span>
+      <h3>Rock Paper Scissors</h3>
+      <p>User vs. computer gameplay with random AI choices and live score tracking. Strategy meets chance.</p>
+      <div class="project-tech">
+        <span class="tech-tag">HTML</span><span class="tech-tag">CSS</span><span class="tech-tag">JavaScript</span>
+      </div>
+      <a href="https://sagnik-2001.github.io/Rock-Paper-Scissors/" target="_blank" class="project-link">View live <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- INTERNSHIP -->
+<section id="internship">
+  <div class="section-label reveal">04 — Experience</div>
+  <h2 class="section-title reveal reveal-delay-1">Internships & Training</h2>
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">Apr 2025 — Present</div>
+      <h3>Full Stack Developer</h3>
+      <h4>Softech ERP Solutions Pvt. Ltd.</h4>
+      <p>Developing and maintaining ERP modules using PHP, JavaScript, jQuery, AJAX, and MySQL. Leading multiple module developments, designing database schemas, building REST APIs, and implementing automated workflows. Improving performance, UI/UX, and architecture across the entire system.</p>
+    </div>
+    <div class="timeline-item reveal reveal-delay-1">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">Sep 2024 — Mar 2025</div>
+      <h3>Software Developer Intern</h3>
+      <h4>Softech ERP Solutions Pvt. Ltd.</h4>
+      <p>Built responsive web applications using HTML, CSS, Bootstrap, and JavaScript. Collaborated with a cross-functional development team, contributing to front-end features and ERP module development.</p>
+    </div>
+    <div class="timeline-item reveal reveal-delay-2">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">Jun — Jul 2024</div>
+      <h3>30-Day Masterclass — Embedded Systems & IoT</h3>
+      <h4>Pantech.ai</h4>
+      <p>Intensive training on embedded systems design, IoT architectures, sensor interfacing, and real-world hardware-software integration.</p>
+    </div>
+    <div class="timeline-item reveal reveal-delay-3">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">Jul 2024</div>
+      <h3>Technical Training — All India Radio</h3>
+      <h4>Akashvani Bhavan, Kolkata</h4>
+      <p>Hands-on exposure to High Power Medium Wave transmitters, FM transmitters, and Captive Earth Stations. Explored electronics across AM/FM and satellite communication systems.</p>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">Jan — Feb 2024</div>
+      <h3>Winter Intern — Microelectronics & VLSI Design</h3>
+      <h4>Jadavpur University</h4>
+      <p>In-depth study of semiconductor devices, circuit design, and VLSI fabrication. Hands-on exposure to industry-standard EDA tools and practical VLSI system design.</p>
+    </div>
+    <div class="timeline-item reveal reveal-delay-1">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">2022</div>
+      <h3>Arduino-Based Systems Workshop</h3>
+      <h4>MCKV Institute of Engineering</h4>
+      <p>Practical workshop on Arduino programming, sensor integration, and building automated hardware prototypes.</p>
+    </div>
+    <div class="timeline-item reveal reveal-delay-2">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">Nov 2021</div>
+      <h3>C & C++ Certification</h3>
+      <h4>Itronix Solutions</h4>
+      <p>Formal certification covering C programming fundamentals and object-oriented programming with C++.</p>
+    </div>
+    <div class="timeline-item reveal reveal-delay-3">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">2021 — 2022</div>
+      <h3>Employability Skills Development Programme</h3>
+      <h4>Mahindra Pride Classroom, Nandi Foundation</h4>
+      <p>Communication, critical thinking, leadership, time management, and professional etiquette for career readiness.</p>
+    </div>
+    <div class="timeline-item reveal reveal-delay-4">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">Ongoing</div>
+      <h3>Cyber Security Training</h3>
+      <h4>Cybervidyapeeth Foundation</h4>
+      <p>Training in cyber security fundamentals, digital safety practices, and threat awareness.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label reveal">05 — Skills</div>
+  <h2 class="section-title reveal reveal-delay-1">What I work with</h2>
+  <div class="skills-groups">
+    <div class="skill-group reveal">
+      <div class="skill-group-title">Frontend</div>
+      <div class="skill-tags">
+        <span class="skill-tag">HTML</span>
+        <span class="skill-tag">CSS</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">jQuery</span>
+        <span class="skill-tag">AJAX</span>
+        <span class="skill-tag">Bootstrap</span>
+        <span class="skill-tag">Responsive UI Design</span>
+      </div>
+    </div>
+    <div class="skill-group reveal reveal-delay-1">
+      <div class="skill-group-title">Backend</div>
+      <div class="skill-tags">
+        <span class="skill-tag">PHP</span>
+        <span class="skill-tag">REST APIs</span>
+        <span class="skill-tag">MVC Structure</span>
+        <span class="skill-tag">PHPMailer</span>
+        <span class="skill-tag">Backend Architecture</span>
+      </div>
+    </div>
+    <div class="skill-group reveal reveal-delay-2">
+      <div class="skill-group-title">Database</div>
+      <div class="skill-tags">
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">SQL Query Optimisation</span>
+        <span class="skill-tag">Schema Design</span>
+      </div>
+    </div>
+    <div class="skill-group reveal reveal-delay-3">
+      <div class="skill-group-title">Mobile & Other</div>
+      <div class="skill-tags">
+        <span class="skill-tag">React Native</span>
+        <span class="skill-tag">C</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">OOP</span>
+        <span class="skill-tag">DSA</span>
+        <span class="skill-tag">Arduino</span>
+        <span class="skill-tag">MATLAB</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <div class="skill-group-title">Tools & DevOps</div>
+      <div class="skill-tags">
+        <span class="skill-tag">VS Code</span>
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">GitHub</span>
+        <span class="skill-tag">Postman</span>
+        <span class="skill-tag">Chrome DevTools</span>
+      </div>
+    </div>
+    <div class="skill-group reveal reveal-delay-1">
+      <div class="skill-group-title">Interests</div>
+      <div class="skill-tags">
+        <span class="skill-tag">AI & Emerging Tech</span>
+        <span class="skill-tag">Mobile App Dev</span>
+        <span class="skill-tag">Open Source</span>
+        <span class="skill-tag">UI/UX Design</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label reveal">06 — Contact</div>
+  <h2 class="section-title reveal reveal-delay-1">Let's talk</h2>
+  <div class="contact-grid">
+    <div class="contact-info reveal reveal-delay-1">
+      <h3>Get in touch</h3>
+      <div class="contact-detail">
+        <div class="contact-detail-icon"><i class="fa-solid fa-envelope"></i></div>
+        <div class="contact-detail-text">
+          Email<br>
+          <a href="mailto:ghoshalsagnik997@gmail.com">ghoshalsagnik997@gmail.com</a>
         </div>
-
-        <div class="project-card">
-            <h3>Project 4: Rock Paper Scissors</h3>
-            <p>My Rock Paper Scissors project with user vs. computer gameplay, random computer choices, and score tracking, offering a fun interactive experience.</p>
-            <p><strong>Tech Stack: </strong>HTML,CSS,Javascript</p>
-            <a href=" https://sagnik-2001.github.io/Rock-Paper-Scissors/" class="project-link">View Project</a>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon"><i class="fa-solid fa-phone"></i></div>
+        <div class="contact-detail-text">
+          Phone<br>
+          <a href="tel:+919083909943">+91 9083909943</a>
         </div>
-      </section>
-
-      <section id="internship">
-        <h2>Internship & Training</h2>
-        <div class="internship-card">
-            <h3>Internship Position: Software Development Intern</h3>
-            <p><strong>Company Name:</strong> Softech ERP Solutions Pvt. Ltd.</p>
-            <p><strong>Duration:</strong> September 2024 - Present</p>
-            <p><strong>Description:</strong> 
-                During my internship at Softech ERP Solutions Pvt. Ltd., I played a key role in developing a web application using HTML, CSS, and JavaScript. This experience significantly enhanced my front-end development skills, allowing me to create responsive and user-friendly interfaces. Additionally, I honed my teamwork abilities by collaborating closely with other developers, learning to communicate effectively and contribute to a dynamic development environment.</p>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <div class="contact-detail-text">
+          Location<br>
+          Vill+P.O Mellock, Bagnan, Howrah — 711303, West Bengal
         </div>
-    
-        <div class="internship-card">
-            <h3>Training: All India Radio</h3>
-            <p><strong>Institution:</strong> Akashvani Bhavan, Kolkata</p>
-            <p><strong>Duration:</strong> July 2024 - August 2024</p>
-            <p><strong>Description:</strong> Here, I gained knowledge and hands-on experience about High Power Medium Wave transmitters, F.M transmitters, Captive Earth Stations and acquatintted with the different aspect of Electronics used in A.M/F.M and Satelite Communication.</p>
-        </div>
-
-        <div class="internship-card">
-            <h3>Winter Internship Position: Microelectronics Technology and VLSI design Intern</h3>
-            <p><strong>Company Name:</strong> Jadavpur Univercity</p>
-            <p><strong>Duration:</strong> January 2024 - February 2024</p>
-            <p><strong>Description:</strong> Engaged in an in-depth exploration of Microelectronics and VLSI design, focusing on the principles of semiconductor devices, circuit design, and fabrication techniques. Gained practical experience in designing VLSI systems and understanding their applications in modern electronics, with hands-on exposure to industry-standard tools and technologies.</p>
-        </div>
-
-        <div class="internship-card">
-            <h3>Training: Employability Skills Development Training Programme</h3>
-            <p><strong>Institution:</strong> Mahindra pride classroom, Nandi Foundation</p>
-            <p><strong>Duration:</strong> Year 2021 - 2022</p>
-            <p><strong>Description:</strong> 
-                During the program, I developed essential skills for the professional world, including improved communication (verbal and written), problem-solving, critical thinking, teamwork, leadership and effective time management. Additionally, the program emphasized professional etiquette, workplace ethics, PPT presentation and adaptability, providing me with a solid foundation of soft skills crucial for career readiness.</p>
-        </div>
-
-        <div class="internship-card">
-            <h3>Training: Office Automation course</h3>
-            <p><strong>Institution:</strong> Uluberia Collage Computer Centre</p>
-            <p><strong>Duration:</strong> April 2016 to June 2016</p>
-            <p><strong>Description:</strong> 
-                During this course, I gained proficiency in essential office software tools, including MS Word, MS Excel, PowerPoint, and MS DOS, with a focus on word processing, spreadsheet management, and presentation design. I learned how to efficiently handle data entry, formatting, and document creation, which significantly improved my productivity and organizational skills. The course also introduced me to basic computer operations and troubleshooting, providing a solid foundation in office automation and enhancing my overall technical skills.</p>
-        </div>
-    </section>
-    
-    
-
-      <!-- skills section  -->
-       <section id="skills">
-        <h2>Skills</h2>
-            <ul>
-                <li><strong>Electronics: </strong>VLSI, Embedded Systems, IOT, Antenna designing, Circuit designing</li>
-                <li><strong>Programming: </strong>C, OOPs with C++, Python</li>
-                <li><strong>Web Development: </strong>SQL, PHP, Bootstrap, HTML, CSS, JavaScript</li>
-                <li><strong>Tools: </strong>VScode, MATLAB, Simulink, Tinkercad, Github</li>
-            </ul>
-       </section>
-
-       <!-- contact section  -->
-       <section id="contact">
-        <h2>Contact Me</h2>
-        <p>If you'd like to connect, feel free to reach out via email, phone, LinkedIn, or follow me on social media.</p>
-        <ul>
-            <li><strong><i class="fa-solid fa-envelope"></i>: </strong> <a href="mailto:ghoshalsagnik997@gmail.com">ghoshalsagnik997@gmail.com</a></li>
-            <li><strong><i class="fa-solid fa-phone"></i>: </strong> <a href="tel:+919083909943">+91 9083909943</a></li>
-            <div style="font-size: 2rem;">
-                <li><a href="https://www.linkedin.com/in/sagnik-ghoshal-53714b239/" target="_blank"><strong><i class="fa-brands fa-linkedin"></i></strong> </a></li>
-                <li><a href="https://github.com/Sagnik-2001" target="_blank"><strong><i class="fa-brands fa-github"></i> </strong></a></li>
-                <li><a href="https://www.instagram.com/sagnik_ghoshal009/" target="_blank"><strong><i class="fa-brands fa-square-instagram"></i> </strong> </a></li>
-                <li><a href="https://www.facebook.com/sagnik.ghoshal.50/" target="_blank"><strong><i class="fa-brands fa-facebook"></i> </strong> </a></li>
+      </div>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/sagnik-ghoshal-53714b239/" target="_blank" class="social-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://github.com/Sagnik-2001" target="_blank" class="social-link" title="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.instagram.com/sagnik_ghoshal009/" target="_blank" class="social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.facebook.com/sagnik.ghoshal.50/" target="_blank" class="social-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <form class="contact-form" id="contact-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="name">Your Name</label>
+            <input class="form-input" type="text" id="name" placeholder="Rahul Sharma" required>
           </div>
-            <li><strong><i class="fa-solid fa-location-dot"></i>: Vill+P.O-Mellock, P.S-Bagnan, Pin-711303<br>Dist-Howrah, State-West Bengal</strong></li>
-          <div class="map-container">
-               <li><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3686.9931360651562!2d87.90495667398146!3d22.466892236838834!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02998b75b4b507%3A0x20d6ff09dee72895!2zQW5uYXB1cm5hIEt1dGhpciAo4KaY4KeL4Ka34Ka-4KayIOCmrOCmvuCnnOCmvyk!5e0!3m2!1sen!2sin!4v1729576966271!5m2!1sen!2sin" width="800" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></li>
-         </div>
-            
-        </ul>
-    </section>
-    
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address</label>
+            <input class="form-input" type="email" id="email" placeholder="hello@email.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="message">Message</label>
+          <textarea class="form-textarea" id="message" placeholder="Tell me about your project or opportunity..." required></textarea>
+        </div>
+        <button type="submit" class="btn-send">Send message <i class="fa-solid fa-paper-plane"></i></button>
+      </form>
+    </div>
+  </div>
+</section>
 
-    <p class="msg">Or, leave me a message below:</p>
-    <form id="contact-form">
-        <input type="text" id="name" placeholder="Your Name" required>
-        <input type="email" id="email" placeholder="Your email" required>
-        <textarea id="message" placeholder="Your message" required></textarea>
-        <button id="submit" style="text-align: center;display: flex;justify-content: center;align-items: center;">Send</button>
-    </form>
-  </section>
-
-  <footer>
-    <p>&copy; 2024 Sagnik Ghoshal. All rights reserved.</p>
+<footer>
+  <p>© 2026 <span>Sagnik Ghoshal</span>. All rights reserved. &nbsp;·&nbsp; Designed with care.</p>
 </footer>
-        <script src="script.js"></script>
+
+<script>
+  // Nav scroll shadow
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // Trigger hero reveals immediately
+  document.querySelectorAll('#home .reveal').forEach((el, i) => {
+    setTimeout(() => el.classList.add('visible'), i * 120);
+  });
+
+  // Contact form
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('.btn-send');
+    btn.textContent = 'Message sent!';
+    btn.style.background = '#2a7a4f';
+    setTimeout(() => {
+      btn.innerHTML = 'Send message <i class="fa-solid fa-paper-plane"></i>';
+      btn.style.background = '';
+      this.reset();
+    }, 3000);
+  });
+</script>
 </body>
 </html>
